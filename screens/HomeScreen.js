@@ -33,7 +33,7 @@ export default function HomeScreen({navigation}){
                 <View style={styles.emailDetail}>
 
                     <Text>{item.time}</Text>
-                    <FontAwesome5 name={item.star ? 'star' : 'star'} size={24} color='yellow'/>
+                    <FontAwesome5 name='star' solid={item.star ? true : false} size={24} color='yellow'/>
 
                 </View>
 
@@ -45,6 +45,14 @@ export default function HomeScreen({navigation}){
         <View style={styles.container}>
 
             <StatusBar style="auto"/>
+
+            <View style={styles.header}>
+
+                <Text style={styles.headerFont}>Caixa de Entrada</Text>
+
+                <FontAwesome5 name="ellipsis-h" size={24} color="black"/>
+
+            </View>
 
             <FlatList
                 data={emails}
@@ -88,5 +96,16 @@ const styles = StyleSheet.create({
     },
     boldFont: {
         fontWeight: "bold",
+    },
+    headerFont: {
+        fontWeight: "bold",
+        fontSize: 25,
+    },
+    header: {
+        height: 50,
+        flexDirection: "row",
+        padding: 5,
+        justifyContent: "space-between",
+        alignItems: "center",
     },
 })
