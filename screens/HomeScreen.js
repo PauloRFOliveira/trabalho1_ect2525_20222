@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {FlatList, Image, StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {FontAwesome5} from '@expo/vector-icons';
 
-export default function HomeScreen(navigation){
+export default function HomeScreen({navigation}){
     const [emails, setEmails] = useState([]);
 
     useEffect(function (){
@@ -15,19 +16,24 @@ export default function HomeScreen(navigation){
 
     function renderItem({item}){
         return(
-            <TouchableOpacity style={styles.email}>
+            <TouchableOpacity style={styles.email} onPress={() => navigation.navigate('EmailScreen', { id: item.id })}>
 
-                <Image style={styles.img} source={{uri: item.picture}}/>
                 <View style={styles.emailInfo}>
 
-                    <Text style={styles.boldFont}>{item.from}</Text>
-                    <Text style={styles.boldFont}>{item.tittle}</Text>
-                    <Text>{item.summary}</Text>
+                    <Image style={styles.img} source={{uri: item.picture}}/>
+                    <View>
+
+                        <Text style={styles.boldFont}>{item.from}</Text>
+                        <Text style={styles.boldFont}>{item.tittle}</Text>
+                        <Text>{item.summary}</Text>
+
+                    </View>
 
                 </View>
                 <View style={styles.emailDetail}>
 
                     <Text>{item.time}</Text>
+                    <FontAwesome5 name={item.star ? 'star' : 'star'} size={24} color='yellow'/>
 
                 </View>
 
@@ -55,24 +61,30 @@ export default function HomeScreen(navigation){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#f00",
+        backgroundColor: "#fff",
     },
     email: {
         height: 100,
         flexDirection: "row",
         backgroundColor: "#fff",
-        justifyContent: "center",
+        justifyContent: "space-between",
+        alignItems: "center",
+        margin: 10,
     },
     img: {
         height: 80,
         width: 80,
         borderRadius: 40,
+        marginRight: 10,
     },
     emailInfo: {
+        flexDirection: "row",
+        alignItems: "center",
 
     },
     emailDetail: {
-
+        justifyContent: "center",
+        alignItems: "center",
     },
     boldFont: {
         fontWeight: "bold",
